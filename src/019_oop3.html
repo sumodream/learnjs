@@ -1,0 +1,94 @@
+<!-- 原型 需要好好消化 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>019_oop3</title>
+	<script type="text/javascript" charset="utf-8">
+
+		//isPrototypeOf(new instance);判断原型的方法
+		//ECMA5新特性 Object.getPrototypeOf();根据实例对象获得原型对象
+		function Person(){
+		}
+		Person.prototype.name="z3";
+		Person.prototype.age=20;
+		Person.prototype.sayName=function(){alert("我是原型对象的方法")};
+/*
+		var p1=new Person();                           //实例化对象
+		alert(p1.name);  //z3
+		var prototypeObj=Object.getPrototypeOf(p1);    //返回的是原型对象
+		alert(prototypeObj);
+		alert(prototypeObj==Person.prototype);
+*/
+
+/*
+		//每次当代码读取一个对象的属性的时候 首先会进行一次搜索 搜索实例对象里面name的属性看看有没有 如果没有 再去p2实例所对应的原型对象里去搜索name属性  如果有 就返回 没有 就返回undefined
+		var p2=new Person();
+		p2.name="w5";          //实例对象的name
+		delete p2.name;
+		alert(p2.name);			//就想获得原型对象里的name属性  那么可以使用delete属性 删除实例化的对象属性 这之后 检测到没有 就会去原型对象里搜索name属性 得到相对应的值 
+
+		//用这种办法 可以在原型初始化里做一个定义  若原型忘记了 则可以将实例的属性删掉 就会得到原型忘记的属性  恢复
+*/
+
+		//判断一个对象属性是否属于原型属性还是实例属性
+/*
+		var p3=new Person();
+		alert(p3.name);
+		alert(p3.hasOwnProperty("name"));   //false 判断这个属性是否属于已经定义的本身的属性 返回的代表是从原型那得到的结果
+*/
+/*
+		var p3=new Person();
+		p3.name="z6";
+		alert(p3.name);
+		alert(p3.hasOwnProperty("name"));   //true
+*/
+
+/*
+		//in 操作符 如for-in  单独判断 这个属性到底属不属于你这个对象 但是辨别不出来原型或是实例 有就返回true
+		//in 操作符 判断是否存在于实例对象
+		var p1=new Person();
+		alert("name" in p1);        //true       name属于原型
+		var p2=new Person();
+		p2.name="w3";
+		alert("name" in p2);		//true
+*/
+
+/*
+		//判断一个属性是否存在原型中
+		//在原型对象中 是否存在这个属性 第一个参数：当前对象 第二个参数：要判断的属性
+		function hasPrototypeProperty(object,name){
+			return !object.hasOwnProperty(name) && name in object;  //取反  既不是实例的对象的属性 也不是原型或是实力对象的属性  若返回true 则证明此属性
+		}
+		var p3=new Person();
+		p3.name="B";                           //此时执行下面的就会返回false
+		alert(hasPrototypeProperty(p3,"name"));    //true  是原型属性
+*/
+
+
+		//ECMA5新特性 Object.keys();  
+		//拿到当前对象里的所有keys 返回一个数组
+		var p1=new Person();
+		p1.name="z3";
+		p1.age=20;
+
+		var attributes=Object.keys(p1);
+		//alert(attributes);
+
+		var attributes2=Object.keys(Person.prototype);
+		//alert(attributes2);                 //返回得到原型中的所有属性
+
+		//ECMA5 constructor属性：该属性不能被枚举(eable=false)
+		//Object.getOwnPropertyNames()方法 枚举对象所有的属性 不管该内部属性能否被枚举
+		var attributes3=Object.getOwnPropertyNames(Person.prototype);
+		alert(attributes3);
+
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

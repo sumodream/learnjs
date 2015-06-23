@@ -1,0 +1,39 @@
+<!-- 执行环境  每个函数都有自己执行的环境  当执行流进一个函数时  函数的环境就被推进一个环境栈中  
+
+和作用域    空值代码的访问权限  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>014_function6</title>
+	<script type="text/javascript" charset="utf-8">
+
+		// 1 执行环境   window 对象 (最上层的执行环境)
+		var color1="bule";       //全局变量
+		function changeColor(){  //每一个函数都有一个执行环境 (variable obj)
+			var color2="red";
+			function swapColor(){   //这个函数又产生了一个执行环境  (variable obj)
+
+				//color3 三级作用域  c2 二级作用域  c1 一级作用域
+				var color3=color2;  //能访问到color2 
+				color2=color1;      //也可以访问到c1 
+				color1=color3;
+				//这里可以访问：color1,2,3
+			}
+
+			//这个可以访问color1,2 但不能访问color3
+			swapColor();     //这里属于的是二级以上的作用域  而c3属于下一级函数体中
+		}
+		//这里只能访问color1
+		changeColor();          //在window 作用域  第一个作用环境  
+
+		//环境变量 可以一层一层的向上进行追朔 可以访问它的上级 环境 (变量和函数)  通俗点说就是小能找大环境的变量 但是较大的不能找较小的变量
+		//一层一层向上追朔  有访问顺序  
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

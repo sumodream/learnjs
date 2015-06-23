@@ -1,0 +1,57 @@
+<!-- 垃圾收集 和 块级作用域 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>015_function7</title>
+	<script type="text/javascript" charset="utf-8">
+
+		//垃圾收集  方法1：标记方法
+		//          方法2：引用计数法
+/*
+		function test(){
+			var a=10;       //被使用  count=1
+			var b=20;		//被使用
+			var c;
+			c=a;    //count ++=2;
+			a=50    //count --;  ==0 的时候回收
+		}
+		test();             //执行完毕   a,b 又被标记一次 没有被使用
+*/
+
+		//块级作用域的概念
+		//高级程序语言 java for if  有块级作用域的概念
+		//js  没有块级作用域的概念
+/*
+		function test(){
+			for(var i=1;i<=5;i++){  //同类的还有if
+				alert(i);  //1,2,3,4,5
+			}
+			 alert(i);     //1,2,3,4,5,6
+		}
+		test();
+*/
+
+		//js : {} 表示执行  模拟块高级级作用域
+/*
+		function test(){
+
+			(function(){   //匿名的函数
+
+				for(var i=1;i<=5;i++){    //for 循环之后 被回收了  之后再alert(i)就是没有被定义
+					alert(i); 
+				}
+
+			})();
+			 alert(i);     
+		}
+		test();
+*/
+		//单独产生一块作用域 
+		//(function(){alert("我直接执行了");})();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

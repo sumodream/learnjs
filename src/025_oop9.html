@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>024_oop9</title>
+	<script type="text/javascript" charset="utf-8">
+/*
+		//混合继承：原型继承和借用构造函数继承
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+
+		Person.prototype={
+			sayHello:function(){
+				alert('hello world');
+			}
+		};
+		function Boy(name,age,sex){
+			//call 绑定父类模板的函数 借用构造函数继承 只复制了父类的模板
+			//Person.call(this,name,age);
+			this.sex=sex;
+		}
+
+		//采用原型继承的方式 既继承父类的模板 又继承父类的原型对象
+		Boy.prototype=new Person();     //此处不写原型对象属性相当于屏蔽掉参数属性  当没有上述call时下面传递的name属性就为undefined
+
+		var b=new Boy('张三',20,'男');
+		alert(b.name);
+		alert(b.sex);
+
+		//混合机制的缺点： 做了三件事：继承了父类的2次模板 继承了一次父类的原型对象  效率低
+*/
+
+
+		//extend方法 2件事 继承一次父类的模板 继承一次父类的原型对象
+		function extend(sub,sup){
+			//目的： 实现只继承父类的原型对象	
+			var F=new Function();       	// 1 创建一个空函数    目的：空函数进行中转
+			F.prototype=sup.prototype;  	// 2 实现空函数的原型对象和超类的原型对象转换
+			sub.prototype=new F();			// 3 原型继承
+			sub.prototype.constructor=sub;  // 4 还原子类的构造器
+			//保存父类的原型对象 一方面方便解耦  另一方面可以方便获得父类的原型对象
+			sub.superClass=sup.prototype;    //自定义一个子类的静态的属性 接收父类的原型对象
+			//判断父类的原型对象的构造器(加保险)
+			if(sup.prototype.constructor==Object.prototype.constructor){
+				sup.prototype.constructor=sup;   //手动还原父类原型对象的构造器
+			}
+		}
+
+
+
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+		}
+
+		Person.prototype={
+			constructor:Person,     //若没有写这句 加保险 判断  当然 这句也可以一起写
+			sayHello:function(){
+				alert('hello world');
+			}
+		};
+		//上述解耦体现在 子类的方法片里面见不到父类的东西
+		function Boy(name,age,sex){
+			//call 绑定父类模板的函数 借用构造函数继承 只复制了父类的模板
+			Boy.superClass.constructor.call(this,name,age);
+			this.sex=sex;
+		}
+
+		//采用原型继承的方式 既继承父类的模板 又继承父类的原型对象
+		//Boy.prototype=new Person();  
+		//只继承一次父类的原型对象
+		extend(Boy,Person);   
+
+		//给子类加了一个原型对象的方法
+		Boy.prototype.sayHello=function(){
+			alert('hi hello js');                //将原始的sayHello覆盖了
+		};
+
+		var b=new Boy('张三',20,'男');
+		alert(b.name);
+		alert(b.sex);
+		b.sayHello();
+		//alert(Boy.superClass.constructor);    //此时得到的是Object  看代码  需要加构造器constructor:Person
+		Boy.superClass.sayHello.call(b);        //加词句之后 两个sayHello都出来了
+
+
+
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

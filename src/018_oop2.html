@@ -1,0 +1,79 @@
+<!-- prototype原型 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>018_oop2</title>
+	<script type="text/javascript" charset="utf-8">
+
+		//原型 prototype
+
+		//构造函数的方式   
+/*
+		function Person(name,age){
+			this.name=name;
+			this.age=age;
+			//this.sayName=function(){alert("我是姓名")};
+			this.sayName=sayName;
+		}
+		//定义一次函数  定义全局变量也不是很合适  有一定的缺点
+		function sayName(){
+			alert(this.name);
+		}
+
+		var p1=new Person("z3",20);
+		var p2=new Person("w5",25);
+		
+		//alert(p1.sayName==p2.sayName);    //false  此时sayName在上面函数体内
+		//alert(p1.name==p2.name);          //false  
+
+		//p1.sayName();                       //将上面注释的移到下面来了  之后形成的结果
+		//p2.sayName();
+		alert(p1.sayName==p2.sayName);      //true  此时是在sayName函数变成全局变量之后的结果
+*/
+
+/*          构造函数的方式  有的缺点总结 ：
+			1 当按照之前学的将sayName置于Person函数体中时  new 连个变量  按照之前的理解  应该归属于同一个类中  判断相等问题时应该相等  但结果是不相等的  此处原因在于每次sayName都要从Person类中重新调用sayName  函数判断取的两次 结果当然是不相等
+
+			2 按照我们的理解 将sayName函数调出Person类时  再比较取值是否相同 此时能相同的原因在于 此时的sayName处于一个全局变量中  整个比较只比较了一次 结果当然相同
+
+			3 那么问题来了 我们按照之前所学的考虑 无论在全局中还是局部中 对于我们调用的时间效率还是有一定的影响 换sayName这个变量的成本也高  此时我们将使用一种效率稍高的方法  引入prototype 放置公共的地方 new一次
+*/		
+
+			//prototype 创建每一个函数的都有一个prototype属性 这个属性其实是一个指针 而这个指针总指向一个对象
+			//这个对象的用途就是将特定的属性和方法包含在内 起到一个所有实例所共享的作用
+
+			function  Person(){
+
+			}
+			var obj=Person.prototype;      //原型对象 被所有实例所共享
+			//alert(obj.constructor);      //构造器指向的 就是 Person类
+			//alert(typeof obj);
+			obj.name="z3";
+			obj.age=20;
+			obj.sayName=function(){alert(this.name);};
+
+			var p1=new Person();
+			var p2=new Person();
+			//alert(p1.age);
+			//alert(p2.age);
+			//p1.sayName();
+			//p2.sayName();
+			//alert(p1.sayName==p2.sayName);        //使用的同一个方法 同一个属性
+
+			//构造函数 function  Person(){}   原型对象 实例对象
+			//构造函数.prototype = 原型对象
+			//原型对象.constructor=构造函数
+			//实例对象.prototype=原型对象
+			//alert(obj.constructor);
+			//alert(p1.prototype);
+			alert(obj.isPrototypeOf(p1));         //判断实例p1的原型是obj
+			var a=new Object();
+			alert(obj.isPrototypeOf(a));          //a这个对象的原型并不是obj
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

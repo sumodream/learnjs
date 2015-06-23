@@ -1,0 +1,114 @@
+<!-- 函数 看PPT p20 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>010_function2</title>
+	<script type="text/javascript" charset="utf-8">
+
+		 //三种方式定义函数
+/*
+		 //1 function 语句式
+		 function test1(){
+		 	alert("我是函数执行体");
+		 }
+		 //test1();
+
+		 //2 函数的直接量 ECMA推荐
+		 var test2=function(){
+		 	alert("我是test2");
+		 }
+		 //test2();
+
+		 //3 Function 构造函数式
+		 var test3=new Function("a","b","return a+b;");
+		 //alert(test3(10,20));    
+*/
+
+/*      //效率对比
+ 		var d1=new Date();
+ 		var t1=d1.getTime();
+ 		for(var i=0;i<10000;i++){
+ 			//function 语句式   时间效率高点  具有静态的特性  占用内存  但这种速度快
+ 			//function test1(){;}
+ 			//Function 构造函数式   时间效率太低  具有动态的特性  编译一次 放在内存里
+ 			test2=new Function();  
+ 		}  
+ 		var d2=new Date();
+ 		var t2=d2.getTime();
+ 		alert(t2-t1); 
+*/
+
+		//解析顺序
+/*
+		//正常理解的顺序
+		function test1(){
+			alert("111");
+		}
+		test1();
+		var test2=function(){
+			alert("222");
+		}
+		test2();            
+*/
+
+/*
+		//解析顺序的问题 对于function语句式的函数 JavaScript解析器会有限的解析
+		test1();
+		function test1(){
+			alert("111");
+		}
+		test2(); 
+		var test2=function(){
+			alert("222");      //不会被执行  应该先申明  后赋值 再执行  类型与全局变量
+		}
+*/
+
+/*
+		alert(test2);		   //undefined 表示申明了 但是没有被赋值
+		//test2(); 
+		var test2=function(){
+			alert("222");     
+		}
+*/
+
+/*
+		//JavaScript解析顺序 4,2,3,3,5,6
+		function f(){return 1;}	//函数1
+		alert(f());         //返回值为4 说明第1个函数被第4个函数覆盖
+
+		var f=new Function("return 2;"); //函数2
+		alert(f());			//返回值为2 说明第4个函数被第2个函数覆盖
+
+		var f=function(){ return 3;} //函数3
+		alert(f());			//返回值为3 说明第2个函数被第3个函数覆盖
+
+		function f(){ return 4}; //函数4
+		alert(f());			//返回值为3 说明第4个函数被第3个函数覆盖
+
+		var f=new Function("return 5;"); //函数5
+		alert(f());			//返回值为5 说明第3个函数被第5个函数覆盖
+
+		var f=function(){return 6;} //函数6
+		alert(f());			//返回值为6 说明第5个函数被第6个函数覆盖
+*/
+
+
+		//函数作用域的概念
+		var k =1;
+		function t1(){
+			var k =2;
+			//function test(){return k;}            // 2  function 语句式
+			//var test=function(){return k};		// 2  函数直接量
+			var test=new Function("return k;");     // 1  构造函授的方式
+			alert(test());
+		}
+		t1();	
+	</script>
+		
+
+</head>
+<body>
+	
+</body>
+</html>

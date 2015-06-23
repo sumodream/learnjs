@@ -1,0 +1,78 @@
+<!--引用类型 objtest  模拟Java里的Map-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>006_objtest</title>
+	<script type="text/javascript" charset="utf-8">
+
+		//var obj=new Object();   //function object
+
+		function Map(){
+			//private 保存 
+			var obj={};    //空的对象容器 承装键值对
+			//put 方法
+			this.put=function(key,value){
+				obj[key]=value;   //把键值对绑定到obj对象上
+
+			}
+			//size 方法 获得map个数
+			this.size=function(){
+				var count=0;
+				for(var attr in obj){
+					count++;
+				}
+				return count;
+			}
+
+			//get 方法 根据key 得到value
+			this.get=function(key){
+				//不考虑为0的情况为第一个条件时 当"02"值为0时显示是null  使程序严谨就得加后面的条件
+				if(obj[key] || obj[key]===0 || obj[key]===false){          
+					
+					return obj[key];   //获取的是value值
+				}else{
+					return null;
+				}
+			}
+
+			//remove 删除方法
+			this.remove=function(key){
+				if(obj[key] || obj[key]===0 || obj[key]===false){          
+					delete obj[key];
+				}
+			}
+
+			//eachMap  遍历Map容器的方法
+			//fn 回调函数 函数传递进来再遍历
+			this.eachMap=function(fn){
+					for(var attr in obj){
+
+						fn(attr,obj[attr]);
+					}
+			}
+		}
+
+
+		//模拟Java里的Map
+		var m=new Map();
+		m.put("01","abc");
+		m.put("02",0); 
+		m.put("03",true);
+		m.put("04",new Date()); 
+
+		//alert(m.size());
+		//alert(m.get("02"));
+		//m.remove("03");        //null
+		//alert(m.get("03"));
+
+		m.eachMap(function(key,value){  
+			alert(key +":" + value);
+		});
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

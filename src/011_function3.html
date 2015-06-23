@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>011_function3</title>
+    <script type="text/javascript" >
+
+		//function 参数
+		
+		//形参列表  形参个数和实参个数没有多大关系
+		//在js中函数的参数  实参  形参
+/*	 
+		function test(a,b,c,d){
+			//return a+b;
+			//alert(test.length);
+			
+			//函数的实际参数  内部就是用一个数组接收函数的实际参数
+			//arguments 对象 可以访问函数的实际参数
+			//arguments 对象 只能在函数的内部访问和使用
+			//alert(arguments.length);
+			//alert(arguments[0]);
+			//alert(arguments[1]);
+		
+			//此处的test.length 应该改为arguments.callee.length 指向函数自己本身的长度  
+			//使用原来的test 会出现很对不可想象的错误 接下来 将展示这些错误
+			if(test.length==arguments.length){  //使用arguments作判断以后就不用改变
+				return a+b;
+			}else{
+				return "参数不正确";
+			}
+
+			//arguments 对象 用的最多的 还是递归操作  作循环操作
+			//arguments.callee   相当于指针  相当于函数自己本身 
+			arguments.callee.length    //形参 length 
+				
+			return a+b;
+		}
+		alert(test(10,20));  //30
+		//alertalert(test()); 
+*/
+
+			function fact(num){
+				if(num<=1) return 1;
+				else return num*arguments.callee(num-1);  //递归阶乘  观察arguments.callee 和 fact之间不同的时候的值 
+			}
+			//alert(fact(5));  //120
+			
+			var F=fact;
+			fact=null;  // 有这句和没有这一句的时候情况的变化  没有 结果120  有 就会报错 fact is not a function    换成arguments.callee 之后也不会报错  指向函数本身 跟名字没有关系  内部表示一个指针 指向函数的整体
+			alert(F(5));  
+		
+
+</script>
+
+</head>
+<body>
+	
+</body>
+</html>

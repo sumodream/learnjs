@@ -1,0 +1,66 @@
+<!-- 闭包 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>016_function8</title>
+	<script type="text/javascript" charset="utf-8">
+
+/*
+		var name="A";
+		var obj={
+			name:"B",
+			getName:function(){
+				return function(){
+					return this.name;     //this 指window
+				}
+			}
+		};
+		//alert(obj.getName()());     //A
+
+		//alert(obj.getName());       //return function(){return this.name;}
+		var k=obj.getName();          //全局作用域
+		//alert(typeof k);            //function
+		alert(k());					  //A   相当于alert(window.k());	
+*/
+
+/*
+		var name="A";
+		var obj={
+			name:"B",
+			getName:function(){
+				//this 总是指向调用者 指向obj
+				var  o=this;
+				return function(){
+					return o.name;    
+				}
+			}
+		};
+		//alert(obj.getName()());   
+		var k=obj.getName();
+		alert(k());
+*/
+
+		//闭包：一个函数可以访问另外一个函数作用域的中变量
+		//封闭性 :类似private  起到一个保护变量的作用
+
+		//1
+		function f(x){         //2
+			var temp=x;		   //局部变量  temp已结没有被使用
+			return function(x){//3 (function 有了一个执行域  var obj)
+				temp+=x;       //又被使用了
+				alert(temp);
+			}
+		}
+		var a=f(50);
+		//alert(a);      //匿名的函数结构体
+		a(5);            // 55
+		a(10);
+		a(20);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>021_oop5</title>
+	<script type="text/javascript" charset="utf-8">
+/*
+		//简单原型 
+		function Person(){
+
+		}
+		//Person.prototype.name="z3"  麻烦
+		Person.prototype={
+			//特意加上之后 可以被枚举  将使用新的方法  看下面
+			//constructor:Person,  //必须得表示原型对象的构造器  constuctor默认不能被枚举
+			name:"z3",
+			age:20,
+			job:"程序猿",
+			say:function(){
+				alert("我是原型的函数");
+			}	
+		}; 
+
+		//ECMA5 给原型重新设置构造器的方法 Object.defineProperty();
+		//考虑到浏览器兼容问题
+		//三个参数：重设构造器的对象   设置什么属性  options配置项
+		Object.defineProperty(Person.prototype,'constructor',{
+			enumerable:false,
+			value:Person
+		});
+*/
+/*
+		var p1=new Person();
+		//alert(p1.name);
+		//p1.say();
+		//加过新特性之后运行结果
+		alert(Person.prototype.constructor);  //没有加上面constructor时获取的是Person的结构体 
+
+		//枚举对象的keys
+		for(attr in p1){
+			alert(attr);
+		}
+*/
+
+
+		//原型的动态特性
+/*		function Person(){
+
+		}
+		var p1=new Person();
+		//原型对象的构造器默认为Person
+		Person.prototype.say=function(){alert("我是方法");};
+		p1.say(); */
+
+		//简单原型  注意 先写好原型对象  再去实例var p1=new Person();  不是简单原型则可以不用这样
+		//注意简单原型使用的顺序 实例对象必须在原型对象创建之后创建
+		function Person(){
+
+		}
+		//var p1=new Person();     //没有得到结果是此处位置的问题
+		//Person.prototype.name="z3"  麻烦
+		Person.prototype={
+			//特意加上之后 可以被枚举  将使用新的方法  看下面
+			//constructor:Person,  //必须得表示原型对象的构造器  constuctor默认不能被枚举
+			name:"z3",
+			age:20,
+			job:"程序猿",
+			say:function(){
+				alert("我是原型的函数");
+			}	
+		}; 
+		var p1=new Person();   //在这里就可以
+		p1.say();   //p1.say is not function  注意上述说的  此时原型对象里面没有任何属性和方法
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

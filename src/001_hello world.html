@@ -1,0 +1,51 @@
+<!--总结：
+        了解JavaScript组成部分 ECMA5Script标准 DOM文档对象模型  BOM浏览器对象模型
+        JavaScript解析机制  顺序解析 边解析边执行
+        知道如何使用JavaScript如何引用        
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>001_hello world</title>
+    
+<!-- 内部引用js程序
+    <script type="text/javascript">
+        //hello world
+        //弹出对话框,不要window 也可以
+        //window.alert('hello world');
+        //文档的对象
+        //document.write('我是文档对象!')
+
+        //两种调试
+        //console.info('hello js！')
+        console.log('hello js!!')
+    </script>
+-->
+
+    <!-- 外部引用js文件使用src  外部引用的js 中间不能写代码 --> 
+    <!-- 解析顺序：从上到下便解析边执行 -->
+    <!-- defer延迟执行代码 可以延迟执行代码(当页面都加载完毕之后 相当于window.onload)-->
+    <script type="text/javascript" src="../commons/001.js" defer="defer"></script>
+    <script type="text/javascript">
+    alert('我是内部引用代码。');
+    </script> 
+
+</head>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

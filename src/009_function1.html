@@ -1,0 +1,47 @@
+<!--函数-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>009_function1</title>
+	<script type="text/javascript" charset="utf-8">
+		//简单的一个函数  function关键字 + 函数的名字  没有返回值类型
+		//定义参数列表里面不需要规定类型 直接起名字就可 
+		//参数列表相当于函数的入口 return 相当于函数的出口
+/*		
+		function test(a,b){
+			//alert(111);
+			return a+b;          
+			//alert(222);			//return 后面的不执行  只要碰到return 即结束函数体
+
+		}
+		var c=test(10,20);
+		//alert(c);
+		alert(typeof test);         //函数也是一种数据类型 是function类型
+*/
+
+		function test1(aa){
+			aa();
+		}
+		function test2(){
+			alert("执行啦");
+		}
+		test1(test2);              				//函数也可以相当于数据引用
+		test1(function(){alert("我也执行啦")}); //也可以把匿名函数当做参数放到函数体内
+
+		//在js中函数可以嵌套定义  但尽量不推荐这样做 没有什么实际意义
+		function test3(){
+			function test4(){
+				alert("我是test4");
+			}
+			test4();
+		}
+		test3();
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
