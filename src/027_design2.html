@@ -21,28 +21,28 @@
              *     function select(obj);
              * }
              */
-            //CompositeImp1 implements Composite,FormItem
-            var CompositeImp1 =function(){
+            //CompositeImpl implements Composite,FormItem
+            var CompositeImpl =function(){
                 //显示的在类的内部 接受所实现的接口
                 //一般来说 我们项目经理:在类的内部定义一个数组(名字要固定)
                 this.implementsInterfaces=['Composite','FormItem'];
 
             }
-            CompositeImp1.prototype.add = function(obj){
+            CompositeImpl.prototype.add = function(obj){
                 alert('add...');
 
             }  
-            CompositeImp1.prototype.remove = function(obj){
+            CompositeImpl.prototype.remove = function(obj){
                 
             }  
-            CompositeImp1.prototype.uopdate = function(obj){
+            CompositeImpl.prototype.uopdate = function(obj){
                 
             }
-            CompositeImp1.prototype.select = function(obj){
+            CompositeImpl.prototype.select = function(obj){
                 
             } 
-            //检测CompositeImp1类的对象的
-            function CheckCompositeImp1(instance){
+            //检测CompositeImpl类的对象的
+            function CheckCompositeImpl(instance){
                 //判断当前对象是否实现了所有接口
                 if(!IsImplements(instance,'Composite','FormItem')){
                     throw new Error('Object does not implement a required interface');
@@ -71,8 +71,8 @@
                 }
                 return true;
             }
-            var c1  =   new CompositeImp1();
-            CheckCompositeImp1(c1);
+            var c1  =   new CompositeImpl();
+            CheckCompositeImpl(c1);
             c1.add();
 
         
