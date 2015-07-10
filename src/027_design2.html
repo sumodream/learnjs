@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>027_design2</title>
+    <script type="text/javascript" charset="utf-8">
+
+        //JavaScript定义接口有三种方式
+
+        // 2 属性检测的方式
+        // 优点:耦合性降低 能检测接口 不再是简单的文档叙述
+        // 缺点:能检测两个接口  但不能检测方法的实例
+           /**
+             *  interface Composite {
+             *      function add(obj);
+             *      function remove(obj);
+             *      function uopdate(obj);
+             *  }
+             *
+             * interface FormItem{
+             *     function select(obj);
+             * }
+             */
+            //CompositeImp1 implements Composite,FormItem
+            var CompositeImp1 =function(){
+                //显示的在类的内部 接受所实现的接口
+                //一般来说 我们项目经理:在类的内部定义一个数组(名字要固定)
+                this.implementsInterfaces=['Composite','FormItem'];
+
+            }
+            CompositeImp1.prototype.add = function(obj){
+                alert('add...');
+
+            }  
+            CompositeImp1.prototype.remove = function(obj){
+                
+            }  
+            CompositeImp1.prototype.uopdate = function(obj){
+                
+            }
+            CompositeImp1.prototype.select = function(obj){
+                
+            } 
+            //检测CompositeImp1类的对象的
+            function CheckCompositeImp1(instance){
+                //判断当前对象是否实现了所有接口
+                if(!IsImplements(instance,'Composite','FormItem')){
+                    throw new Error('Object does not implement a required interface');
+
+                }
+            }
+            //公用的具体的检测方法(核心方法),起到复用的作用,返回值类型boolean
+            //这个方法的主要目的就是判断实例对象有没有实现相关的接口
+            function IsImplements(object){
+                //arguments 对象 获得函数的实际参数
+                for (var i = 1 ; i < arguments.length;i++){
+                    //接收所实现的每一个接口的名字
+                    var interfaceName = arguments[i];
+                    //判断此方法到底成功或失败
+                    var interfaceFound = false ;
+                    for(var j = 0 ; j < object.implementsInterfaces.length ; j++){
+                        if (object.implementsInterfaces[j]==interfaceName){
+                            interfaceFound =true;
+                            break;
+                        }
+                    }
+                    if(!interfaceFound){
+                        return false;
+                    }
+
+                }
+                return true;
+            }
+            var c1  =   new CompositeImp1();
+            CheckCompositeImp1(c1);
+            c1.add();
+
+        // 3 鸭式辨型的方式
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

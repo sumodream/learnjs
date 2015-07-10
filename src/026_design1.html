@@ -8,8 +8,8 @@
 		//JavaScript定义接口有三种方式
 
 		// 1 注释描述的方式
-
-
+		// 优点:程序员可以有一个参考
+		// 缺点:还是属于文档的范畴 ; 这种方式太松散 没有检查接口的方法是否完全被实现(少一个方法不会报错)
 			/**
 			 * 	interface Composite {
 			 * 		function add(obj);
@@ -18,10 +18,22 @@
 			 *  }
 			 */
 			 // CompositeImp1 implements Composite  模仿Java的做法  实现的接口
-			 var CompositeImp1=function(){   //函数也是一个类
-			 	
+			 var CompositeImp1=function(){   //函数也是一个类 函数直接量的方式
+			 	 	
 			 };
-			 CompositeImp1.prototype.add = function
+			 //实例化的方法
+			 CompositeImp1.prototype.add = function(obj){
+
+			 }  
+			 CompositeImp1.prototype.remove = function(obj){
+			 	
+			 }  
+			 CompositeImp1.prototype.uopdate = function(obj){
+			 	
+			 }  
+			 var c1	= new CompositeImp1();
+			 var c2 = new CompositeImp1();
+			 alert(c1.add == c2.add);
 
 		// 2 属性检测的方式
 
