@@ -1,4 +1,4 @@
-<!-- 单体模式 -->
+<!-- 单体与闭包单体模式 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,22 +44,32 @@
             CT.Singleton = (function(){
 
                 //添加自己的私有成员 外部没有办法访问 可通过return访问
-                var a1
-
+                
+                var a1 = true;
+                var a2 = 12;
+                var f1 = function(){
+                    alert('f1');
+                }
+                var f2 = function(){
+                    alert('f2');
+                }
+                  
                 
                 //把块级作用域里的执行结果赋值给我的单体对象
                 return {
-                    attr1:true,
-                    attr2:10,
+                    attr1:a1,
+                    attr2:a2,
                     method1:function(){
-                        alert('我是方法1');
+                        return f1();
                     },
                     method2:function(){
-                        alert('我是方法2');
+                        return f2();
                     }
                 };
 
             })();
+            alert(CT.Singleton.attr1);      
+            CT.Singleton.method1();
 
             /*
             //利用块级作用域的方法
