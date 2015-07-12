@@ -4,9 +4,9 @@
 
 
 /**
- *  BH 命名空间  namespace
+ *  CT 命名空间  namespace
  */
-var BH = {} ;
+var CT = {} ;
 
 /**
  * Interface Class
@@ -14,7 +14,7 @@ var BH = {} ;
  * 参数1: 接口的名字 (string)
  * 参数2: 接受方法名称的集合(数组) (array)
  */
-BH.Interface = function(name,methods){
+CT.Interface = function(name,methods){
 	//判断接口的参数个数
 	if(arguments.length != 2){
 		throw new Error('this instance interface constructor arguments must be 2 length!');
@@ -37,7 +37,7 @@ BH.Interface = function(name,methods){
 // 三：检验接口里的方法
 // 如果检验通过 不做任何操作 不通过：浏览器抛出error
 // 这个方法的目的 就是检测方法的
-BH.Interface.ensureImplements = function(object){
+CT.Interface.ensureImplements = function(object){
 	// 如果检测方法接受的参数小于2个 参数传递失败!
 	if(arguments.length < 2 ){
 		throw new Error('Interface.ensureImplements method constructor arguments must be  >= 2!');
@@ -47,7 +47,7 @@ BH.Interface.ensureImplements = function(object){
 	for(var i = 1 , len = arguments.length; i<len; i++ ){
 		var instanceInterface = arguments[i];
 		// 判断参数是否是接口类的类型
-		if(instanceInterface.constructor !== BH.Interface){
+		if(instanceInterface.constructor !== CT.Interface){
 			throw new Error('the arguments constructor not be Interface Class');
 		}
 		// 循环接口实例对象里面的每一个方法
@@ -69,7 +69,7 @@ BH.Interface.ensureImplements = function(object){
  * @param {Object} sub
  * @param {Object} sup
  */			
-BH.extend=function(sub ,sup){
+CT.extend=function(sub ,sup){
 	 // 目的： 实现只继承父类的原型对象
 	 var F = new Function();	// 1 创建一个空函数    目的：空函数进行中转
 	 F.prototype = sup.prototype; // 2 实现空函数的原型对象和超类的原型对象转换
@@ -88,7 +88,7 @@ BH.extend=function(sub ,sup){
  * 单体模式
  * 实现一个跨浏览器的事件处理程序
  */
-BH.EventUtil = {
+CT.EventUtil = {
 	addHandler:function(element , type , handler){
 		if(element.addEventListener){		//FF
 			element.addEventListener(type,handler,false);
