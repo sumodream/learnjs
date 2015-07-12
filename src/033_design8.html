@@ -1,0 +1,36 @@
+<!-- 模拟jQuery底层链式编程2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>033_design8</title>
+    <script type="text/javascript" src="../commons/jquery.js"></script>
+  
+    
+</head>
+<body>
+    <input id="inp" type="button" value="点击我"/>
+
+    <!-- 加载顺序的问题 在head中返回为null -->
+    <script type="text/javascript">
+
+ 
+        $.onReady(function(){
+            //jquery代码
+            //alert(11);
+            //alert($('#inp'));
+            //$('#inp').addEvent().setStyle();
+            var inp = $('#inp');
+            //alert(inp.dom.nodeName);
+            inp.addEvent('click',function(){
+                alert('我被点击了!');
+            }).setStyle('backgroundColor','red');
+            
+        });
+
+       
+
+    </script>
+</body>
+</html>
+

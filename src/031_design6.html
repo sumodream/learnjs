@@ -1,0 +1,40 @@
+<!-- 函数链式调用 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>031_design6</title>
+    <script type="text/javascript">
+
+        //1.简单的函数链式调用
+        
+        function Dog(){
+            this.run = function(){
+                alert('dog is running ...');
+                return this;
+            };
+            this.eat = function(){
+                alert('dog is eating ...');
+                return this;
+            };
+            this.sleep = function(){
+                alert('dog is sleep ...');
+                return this;
+            }
+        }
+        var d1 = new Dog();
+        //采用链式调用 需在方法体中返回this当前对象 若没有 则只出现第一个方法
+        d1.run().eat().sleep();
+        //d1.eat();
+        //d1.sleep();
+        
+       
+
+       
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
