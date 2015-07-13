@@ -1,0 +1,90 @@
+<!-- 引入继承搭建的工厂环境-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>035_design_factor02</title>
+    <!-- 引入的核心js公共文件 -->
+    <script type="text/javascript" src="../commons/CommonUtil.js"></script>
+    <script type="text/javascript">
+        //搭建一个工厂的环境
+        //卖车的商店
+        function CarShop(){};
+        CarShop.prototype = {         //原型对象
+            constructor : CarShop ,   //还原构造器
+            sellCar : function(type){
+                var car ; //声明一个变量
+                switch(type) {
+                    case 'Benz': car = new Benz(); break;
+                    case 'Bmw' : car = new Bmw();  break;
+                    case 'Audi': car = new Audi(); break;
+                    default:'not buy it' ;
+                }
+                //检验接口实现
+                CT.Interface.ensureImplements(car,CarInterface);
+                return car ;
+            }
+        };
+        //接口对像的实例
+        var CarInterface = new CT.Interface('CarInterface',['start','run']);
+
+        //SuperClass (超类) implements  CarInterface  
+        //可以公共使用的 然后CT.extend(Benz,BaseCar);
+        function BaseCar(){};
+        BaseCar.prototype = {
+            constructor : BaseCar ,
+            start : function(){
+                //以下alert中需要一步步理解
+                alert(this.constructor.name+'..start');
+            },
+            run : function(){
+                alert(this.constructor.name+'..run');
+
+            }
+        };
+
+        //Class benz bmw audi  (都是车)
+        //此处原型与继承呼唤位置 就不可以 参考原型对象那章的动态特性  
+        //注意:关键问题:子类先继承父类 子类再扩展子类自己特有的方法
+        function Benz(){};
+        CT.extend(Benz,BaseCar);
+        //特有的方法
+        Benz.prototype.driveBenz = function(){alert('Benz .. drive')};
+            //Benz.prototype.start = function(){alert('Benz start')};
+            //Benz.prototype.run = function(){alert('Benz run')};
+
+        function Bmw(){};
+        CT.extend(Bmw,BaseCar);
+        Bmw.prototype.driveBmw = function(){alert('Bmw .. drive')};
+            //Bmw.prototype.start = function(){alert('Bmw start')};
+            //Bmw.prototype.run = function(){alert('Bmw run')};
+
+        function Audi(){};
+        CT.extend(Audi,BaseCar);
+        Audi.prototype.driveAudi = function(){alert('Audi .. drive')};
+            //Audi.prototype.start = function(){alert('Audi start')};
+            //Audi.prototype.run = function(){alert('Audi run')};
+
+            var shop = new CarShop();
+            var car = shop.sellCar('Benz');
+            car.start();
+            car.run();
+            car.driveBenz();
+
+            var car2 = shop.sellCar('Bmw');
+            car2.start();
+            car2.run();
+            car2.driveBmw();
+
+            var car3 = shop.sellCar('Audi');
+            car3.start();
+            car3.run();
+            car3.driveAudi();
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

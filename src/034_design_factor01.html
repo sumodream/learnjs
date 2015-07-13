@@ -1,0 +1,56 @@
+<!-- 利用鸭式辨型法搭建的工厂环境 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>034_design_factor01</title>
+    <!-- 引入的核心js公共文件 -->
+    <script type="text/javascript" src="../commons/CommonUtil.js"></script>
+    <script type="text/javascript">
+        //搭建一个工厂的环境
+        //卖车的商店
+        function CarShop(){};
+        CarShop.prototype = {         //原型对象
+            constructor : CarShop ,   //还原构造器
+            sellCar : function(type){
+                var car ; //声明一个变量
+                switch(type) {
+                    case 'Benz': car = new Benz(); break;
+                    case 'Bmw' : car = new Bmw();  break;
+                    case 'Audi': car = new Audi(); break;
+                    default:'not buy it' ;
+                }
+                //检验接口实现
+                CT.Interface.ensureImplements(car,CarInterface);
+                return car ;
+            }
+        };
+        //接口对像的实例
+        var CarInterface = new CT.Interface('CarInterface',['start','run']);
+
+        //Class benz bmw audi  (都是车)
+        function Benz(){};
+            Benz.prototype.start = function(){alert('Benz .. start')};
+            //若此时注释掉run 则整个程序都不会运行 是因为接口处已经调用run 整个环境上都想通才能实现
+            Benz.prototype.run = function(){alert('Benz .. run')};
+
+        function Bmw(){};
+            Bmw.prototype.start = function(){alert('Bmw .. start')};
+            Bmw.prototype.run = function(){alert('Bmw .. run')};
+
+        function Audi(){};
+            Audi.prototype.start = function(){alert('Audi .. start')};
+            Audi.prototype.run = function(){alert('Audi .. run')};
+
+            var shop = new CarShop();
+            var car = shop.sellCar('Benz');
+            car.start();
+            car.run();
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
