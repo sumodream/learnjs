@@ -89,6 +89,7 @@ CT.extend=function(sub ,sup){
  * 实现一个跨浏览器的事件处理程序
  */
 CT.EventUtil = {
+	//addHandler(el,type,fn);
 	addHandler:function(element , type , handler){
 		if(element.addEventListener){		//FF
 			element.addEventListener(type,handler,false);

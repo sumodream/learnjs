@@ -1,4 +1,4 @@
-<!-- 工厂的实现 -->
+<!-- 简单工厂的实现 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,8 @@
     <script type="text/javascript">
         //细粒度 粗粒度 (软件工程思想)
         
-        //万事万物都是object : 卖车的商店 ->  卖车 -> 生产车 -> Factory(工厂)
+        //万事万物都是object : 卖车的商店 ->  卖车 -> 生产车 -> Factory(工厂) 
+        //解耦模式  细分各个环节
         
 
 
@@ -19,30 +20,25 @@
         CarShop.prototype = {         //原型对象
             constructor : CarShop ,   //还原构造器
             sellCar : function(type){
-                /*
-                var car ; //声明一个变量
-                switch(type) {
-                    case 'Benz': car = new Benz(); break;
-                    case 'Bmw' : car = new Bmw();  break;
-                    case 'Audi': car = new Audi(); break;
-                    default:'not buy it' ;
-                }
-                //检验接口实现
-                CT.Interface.ensureImplements(car,CarInterface);
+                //销售人员...
+                var car = CarFactory.creatCar(type);
+                //保险 相关的售后服务
                 return car ;
-                */
+                
             }
         };
         //生产车的工厂 目的就是为了生产车
-        //单体模式
+        //单体模式(参考之前做的 比较差别)
         var CarFactory = {
-            creatCar : function(){
+            creatCar : function(type){
                 var car ; //声明一个变量
                 switch(type) {
                     case 'Benz': car = new Benz(); break;
                     case 'Bmw' : car = new Bmw();  break;
                     case 'Audi': car = new Audi(); break;
                     default:'not buy it' ;
+         
+
                 }
                 //检验接口实现
                 CT.Interface.ensureImplements(car,CarInterface);
