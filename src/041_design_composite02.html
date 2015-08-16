@@ -48,10 +48,27 @@
                     return this ;
                 },
                 getChild : function(name){
+                    //接收叶子对象类型的数组
+                    var elements = [];
+
+                    //根据name让指定name下所有类型为leaf的对象去执行操作
+                    if(name){
+                        
+
+                    }
+                    //不传递name让整个公司所有类型为leaf的对象去执行操作
+                    else{
+                        this.children.each(function(item){
+                            alert(item.name);
+                        });
+
+                    }
+
+                    return elements;
 
                 },
                 hardworking : function(name){
-                    //得到所有的leaf类型的对象
+                    //得到所有的leaf类型的对象数组
                     var leafObjects = this.getChild(name) ;
                     for(var i = 0 ; i<leafObjects.length ; i++){
                         leafObjects[i].hardworking();
@@ -88,6 +105,7 @@
                 }
             };
             
+            //测试数据
             var l1 = new Leaf('张1');
             var l2 = new Leaf('张2');
             var l3 = new Leaf('张3');
@@ -100,10 +118,12 @@
             var com2 = new Composite('设计部门');
             com1.addChild(l4).addChild(l5).addChild(l6);
 
-            var org = new Org('baidu');
+            var org = new Composite('baidu');
             org.addChild(com1).addChild(com2);
 
-            org.hardworking('开发部门');
+            //让整个公司下所有的员工都努力工作
+            org.hardworking();
+
             
     
     </script>
