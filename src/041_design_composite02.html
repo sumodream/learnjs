@@ -19,11 +19,21 @@
             /*
              * 场景模拟：
              *  -> 公司 
-             *          -> 财务部门
+             *     ->北京分公司
+             *              -> 开发部门
              *                      -> 张一
              *                      -> 张二
              *                      -> 张三
-             *          -> 销售部门
+             *              -> 设计部门
+             *                      -> 张四
+             *                      -> 张五
+             *                      -> 张六
+             *     ->长沙分公司
+             *              -> 开发部门
+             *                      -> 张一
+             *                      -> 张二
+             *                      -> 张三
+             *              -> 设计部门
              *                      -> 张四
              *                      -> 张五
              *                      -> 张六
@@ -50,17 +60,45 @@
                 getChild : function(name){
                     //接收叶子对象类型的数组
                     var elements = [];
+                    //判断对象是否为leaf类型的 如果是直接加到elements数组中 不是直接继续递归调用
+                    var pushLeaf = function(item){
+                            if(item.type === 'Composite'){
+                                item.children.each(arguments.callee);
+                            }else if(item.type === 'Leaf'){
+                                elements.push(item);
+                            }
+                        };
 
                     //根据name让指定name下所有类型为leaf的对象去执行操作
-                    if(name){
+                    if(name && this.name !==name){
+                        this.children.each(function(item){
+                            //如果你传递的name是二级节点名称
+                            if(item.name === name && item.type === 'Composite'){
+                                item.children.each(pushLeaf);
+
+                            }
+                            //如果传递name是三级节点或四级节点等
+                            if(item.name !== name && item.type === 'Composite'){
+                                item.children.each(arguments.callee);
+                            }
+                            //如果传递的name是叶子节点的时候
+                            if(item.name === name && item.type === 'Leaf'){
+                                elements.push(item);
+                            }
+                        });
                         
 
                     }
                     //不传递name让整个公司所有类型为leaf的对象去执行操作
                     else{
-                        this.children.each(function(item){
-                            alert(item.name);
-                        });
+                        this.children.each(pushLeaf);
+                            /*{
+                            if(item.type === 'Composite'){
+                                item.children.each(arguments.callee);
+                            }else if(item.type === 'Leaf'){
+                                elements.push(item);
+                            }
+                        });*/
 
                     }
 
@@ -112,17 +150,38 @@
             var l4 = new Leaf('张4');
             var l5 = new Leaf('张5');
             var l6 = new Leaf('张6');
+            var l7 = new Leaf('张7');
+            var l8 = new Leaf('张8');
+            var l9 = new Leaf('张9');
+            var l10 = new Leaf('张1');
+            var l11 = new Leaf('张11');
+            var l12 = new Leaf('张12');
+            
 
-            var com1 = new Composite('开发部门');
+            var com1 = new Composite('北京开发部门');
             com1.addChild(l1).addChild(l2).addChild(l3);
-            var com2 = new Composite('设计部门');
-            com1.addChild(l4).addChild(l5).addChild(l6);
+            var com2 = new Composite('北京设计部门');
+            com2.addChild(l4).addChild(l5).addChild(l6);
 
-            var org = new Composite('baidu');
-            org.addChild(com1).addChild(com2);
+            var com3 = new Composite('上海开发部门');
+            com3.addChild(l7).addChild(l8).addChild(l9);
+            var com4 = new Composite('上海设计部门');
+            com4.addChild(l10).addChild(l11).addChild(l12);
+
+            var org1 = new Composite('北京分公司');
+            org1.addChild(com1).addChild(com2);
+
+            var org2 = new Composite('上海分公司');
+            org2.addChild(com3).addChild(com4);
+
+            var org = new Composite('总部');
+            org.addChild(org1).addChild(org2);
+            
 
             //让整个公司下所有的员工都努力工作
-            org.hardworking();
+            
+           // org.hardworking('总部');   不传递name和传递name效果一样
+           org.hardworking('张12'); 
 
             
     
