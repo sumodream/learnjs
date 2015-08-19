@@ -60,6 +60,7 @@
 			return null ;
 		};
 
+		//适配器 连接两种库
 		YAHOO.get = YUIToPrototypeAdapter;
 		function  YUIToPrototypeAdapter(){
 			//对于YUI开发人员来说,永远传递一个参数
@@ -70,8 +71,7 @@
 			else{
 				return $.apply(window , arguments);
 			}
-		}
-		
+		}		
 		window.onload = function(){
 			/*
 			//prototype开发人员习惯的方法
