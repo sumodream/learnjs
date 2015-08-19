@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>042_design_facade</title>
+	<!-- 引入的核心js公共文件 -->
+    <script type="text/javascript" src="../commons/CommonUtil.js"></script>
+	<script type="text/javascript">
+		//门面模式的概念:简化API接口  最经典的是事件
+		//2个函数 a,b
+		//做一件事情 必须调用两个函数分别是a,b
+		/*
+		function a(x){
+			//do something
+		}
+		function b(y){
+			//do something
+		}
+		function  ab(x,y){
+			a(x);
+			b(y);
+		}
+		*/
+		
+		//现在有一个简单的需求 获得页面上行的元素 给的到的元素设置css样式
+		/*
+		window.onload = function(){
+			var element = document.getElementById('div1');
+			element.style.color ='red';
+		};
+		*/
+		//需求发生变化 同时设置多个css样式  (需要公共的 封装起来  简化API)
+		//简单的门面模式
+		window.onload = function(){
+			setStyle(['div1','div2','div3'],'color','blue');
+		};
+		function setStyle(elementsId,prop,val){
+			for(var i = 0 ; i < elementsId.length ; i++){
+					document.getElementById(elementsId[i]).style[prop] = val;
+			}
+
+		}
+
+
+	</script>
+</head>
+<body>
+		<div id="div1">我是div1</div>
+		<div id="div2">我是div2</div>
+		<div id="div3">我是div3</div>
+</body>
+</html>

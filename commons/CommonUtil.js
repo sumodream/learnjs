@@ -85,7 +85,7 @@ CT.extend=function(sub ,sup){
 
 
 /**
- * 单体模式
+ * 单体模式(门面模式)
  * 实现一个跨浏览器的事件处理程序
  */
 CT.EventUtil = {
