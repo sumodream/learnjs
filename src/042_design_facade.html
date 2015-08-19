@@ -1,3 +1,4 @@
+<!-- 门面模式 不要滥用 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +24,7 @@
 		*/
 		
 		//现在有一个简单的需求 获得页面上行的元素 给的到的元素设置css样式
+		//给一个元素设置一个样式
 		/*
 		window.onload = function(){
 			var element = document.getElementById('div1');
@@ -30,7 +32,8 @@
 		};
 		*/
 		//需求发生变化 同时设置多个css样式  (需要公共的 封装起来  简化API)
-		//简单的门面模式
+		//给多个元素设置同样的样式 简单的门面模式
+		/*
 		window.onload = function(){
 			setStyle(['div1','div2','div3'],'color','blue');
 		};
@@ -40,8 +43,29 @@
 			}
 
 		}
+		*/
 
-
+		//给多个元素设置多种样式
+		window.onload = function(){
+		setCss(['div1','div2','div3'],{
+			//position:'absolute',
+			background:'red',
+			fontSize:'18px'
+			//left:'100px'
+		});
+	};
+		function setStyle(elementsId,prop,val){
+			for(var i = 0 ; i < elementsId.length ; i++){
+					document.getElementById(elementsId[i]).style[prop] = val;
+			}
+		}
+		//门面模式css方法
+		function setCss(elementsId,options){
+			for( var prop in options){
+				if(!options.hasOwnProperty(prop)) continue;
+				setStyle(elementsId,prop,options[prop]);
+			}
+		}
 	</script>
 </head>
 <body>
