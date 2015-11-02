@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sum</title>
+    <script type="text/javascript">
+        /**
+         * 此种情况下,与下面一同显示并没有什么问题
+         * 单独显示出现 TypeError: 'undefined' is not a function (evaluating 'sum(10,10)')错误
+         * 不会执行到下一句
+         * 函数位于一个初始化语句中,不是函数声明
+         * 在执行函数所在的语句前,变量sum不会存在对函数的引用
+         * 此错误在Safari Firefox chrome等里出现
+         */
+        alert(sum(10,10));
+        var sum = function(num1,num2){
+            return num1+num2;
+        };
+
+        /**
+         * 解析器通过函数声明提升到顶部,读取函数声明并添加到执行环境中
+         * 两者放一起运行不出错
+         */
+        alert(sum(10,10));
+        function sum(num1,num2){
+            return num1+num2;
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
