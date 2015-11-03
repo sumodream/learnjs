@@ -16,4 +16,4 @@ function outer(){
 function inner(){
 	console.log(arguments.callee.caller);		//null
 }
-outer();
+outer(); 
