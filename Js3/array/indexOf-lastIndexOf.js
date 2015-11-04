@@ -35,8 +35,8 @@ while(pos > -1){
 	position.push(pos);
 	pos = stringValue1.indexOf('e',pos+1);
 }
-console.log(position);
-console.log(position.length);
+console.log(position);              //[ 3, 14, 21, 28, 34, 40, 42, 46 ]
+console.log(position.length);       //8
 
 
 

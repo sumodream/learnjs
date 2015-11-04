@@ -3,7 +3,9 @@ console.log(stringValue.length);		//11
 //返回该位置的字符
 console.log(stringValue.charAt(1));		//e
 //返回该位置的字符编码
-console.log(stringValue.charCodeAt(1));	//101
+console.log(stringValue.charCodeAt(1));	//e->101
+//与charCodeAt相反的方法 String.fromCharCode()
+console.log(String.fromCharCode(104,101,108,108,111));//hello
 //特定访问字符
 console.log(stringValue[1]);			//e
 
