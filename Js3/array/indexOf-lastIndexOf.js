@@ -16,8 +16,27 @@ console.log(numbers.indexOf(4,4));   	//5
 //按倒序显示从第几个参数开始计算的值的位置
 console.log(numbers.lastIndexOf(4,4));  //3
 
+//参照上面
+var stringValue = 'hello world';
+console.log(stringValue.indexOf('o'));		//4
+console.log(stringValue.lastIndexOf('o'));	//7
+console.log(stringValue.indexOf('o',6));		//7
+console.log(stringValue.lastIndexOf('o',6));	//4
 
 
+/**
+ * 循环匹配所有的子字符串
+ * @type {String}
+ */
+var stringValue1 = 'Lorem ipsad wdev dsfger dasde cvfbe fdfwe e dse';
+var position = new Array();
+var pos = stringValue1.indexOf('e');
+while(pos > -1){
+	position.push(pos);
+	pos = stringValue1.indexOf('e',pos+1);
+}
+console.log(position);
+console.log(position.length);
 
 
 
