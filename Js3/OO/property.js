@@ -73,6 +73,7 @@ Object.defineProperty(person3,'name',{
  * @type {Object}
  */
 //get和set可以只写其一  但若没有该方法 尝试写入或读取会报错或undefined
+//不支持Object.defineProperty()方法的浏览器 不能修改[[Configurable]] [[Enumerable]] 
 var book = {
     //_year 前面 _ 是常用的记号 表示只能通过对象方法访问的属性
     _year : 2015 ,
@@ -93,7 +94,7 @@ book.year = 2016 ;
 console.log(book.edition);      //3
 
 //定义访问器的旧方法(不好使)
-var book1 = {
+/*var book1 = {
     _year : 2015 ,
     edition : 2
 };
@@ -107,4 +108,35 @@ book1._defineSetter_('year',function(newValue){
     }
 });
 book1.year = 2016 ;
-console.log(book1.edition);
+console.log(book1.edition);*/
+
+//定义多个属性(在同一时间创建的)
+var book2 = {};
+Object.defineProperties(book2,{
+    _year : {
+        value : 2015
+    },
+    edition : {
+        value : 2
+    },
+    year : {
+        get : function(){
+            return this._year ;
+        },
+        set : function(newValue){
+            if(newValue > 2015){
+                this._year = newValue ;
+                this.edition += newValue - 2015 ;
+            }
+        }
+    }
+});
+var descriptor = Object.getOwnPropertyDescriptor(book2,'_year');
+console.log(descriptor.value);           //2015
+console.log(descriptor.configurable);    //false
+console.log(typeof descriptor.get);      //undefined
+
+var descriptor = Object.getOwnPropertyDescriptor(book2,'year');
+console.log(descriptor.value);          //undefined
+console.log(descriptor.enumerable);     //false
+console.log(typeof descriptor.get);     //function  get指向getter函数的指针
