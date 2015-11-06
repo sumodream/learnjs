@@ -1,4 +1,5 @@
 /**
+ * 单体内置对象 Global和Math
  * max min 可接收任意多个数值参数
  * 避免多余的if语句中确定一组的大小值
  * @type {[type]}

@@ -14,7 +14,7 @@
  */
 var person = {
     name : 'sumo',
-    age  : '23',
+    sex  : 'female',
     job  : 'Front end Engineer'
 };
 console.log(person.name);       //sumo
