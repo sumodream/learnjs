@@ -5,7 +5,6 @@
  * 不必在构造函数中定义对象实例的信息 可以将这些信息直接添加到原型对象中
  */
 function Person(){
-
 }
 Person.prototype.name = 'lily' ;
 Person.prototype.age = 20;
@@ -30,3 +29,55 @@ console.log(Person.prototype.isPrototypeOf(p2));	//true
 console.log(Object.getPrototypeOf(p1) == Person.prototype);		//true
 //取得原型对象中的name属性的值
 console.log(Object.getPrototypeOf(p1).name);					//lily
+
+
+/**
+ * 不能通过实例重写原型中的值
+ * 在实例中添加属性 会覆盖原型的属性
+ */
+function Personnew(){
+}
+Personnew.prototype.name = 'rose';
+Personnew.prototype.age = 18 ;
+Personnew.prototype.job = 'student' ;
+Personnew.prototype.sayName = function(){
+	console.log(this.name);
+};
+var a1 = new Personnew();
+var a2 = new Personnew();
+//hasOwnProperty()检测一个属性是否存在于实例中还是原型中 只在给属性存在于实例中才返回true
+//in 操作符检测存在于实例或是原型中 都返回true
+console.log(a1.hasOwnProperty('name'));				//false
+console.log('name' in a1);							//true
+a1.name = 'apple' ;
+console.log(a1.name);								//apple  实例
+console.log(a2.name);								//rose   原型
+console.log(a1.hasOwnProperty('name'));				//true
+console.log(a2.hasOwnProperty('name'));				//false
+console.log('name' in a1);							//true
+delete a1.name;
+console.log(a1.name);								//rose   删除过后的 来自原型
+console.log(a2.hasOwnProperty('name'));				//false
+console.log('name' in a1);							//true
+
+//检测属性存在于实例中还是原型中 
+//hasOwnProperty()只在实例中返回true 
+//in 实例原型都返回true
+function hasPrototypeProperty(object,name){
+	return !object.hasOwnProperty(name) && (name in object);
+}
+function Personin(){
+}
+Personin.prototype.name = 'lemmon';
+Personin.prototype.age = 18 ;
+Personin.prototype.job = 'student' ;
+Personin.prototype.sayName = function(){
+	console.log(this.name);
+};
+var a3 = new Personin();
+//in
+console.log(hasPrototypeProperty(a3,'name'));			//true   原型
+a3.name = 'mm' ;
+console.log(a3.name);
+//hasOwnProperty()
+console.log(hasPrototypeProperty(a3,'name'));			//false  实例
