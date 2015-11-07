@@ -62,7 +62,7 @@ console.log('name' in a1);							//true
 
 //检测属性存在于实例中还是原型中 
 //hasOwnProperty()只在实例中返回true 
-//in 实例原型都返回true
+//for-in 实例原型都返回true
 function hasPrototypeProperty(object,name){
 	return !object.hasOwnProperty(name) && (name in object);
 }
@@ -81,3 +81,41 @@ a3.name = 'mm' ;
 console.log(a3.name);
 //hasOwnProperty()
 console.log(hasPrototypeProperty(a3,'name'));			//false  实例
+
+//Object.keys()取得对象上所有可枚举的实例属性
+var keys = Object.keys(Personin.prototype);
+console.log(keys);                                      //[ 'name', 'age', 'job', 'sayName' ]
+var a4 = new Personin();
+a4.name = 'sat' ;
+a4.age = 7 ;
+var a4keys = Object.keys(a4);
+console.log(a4);                                        //{ name: 'sat', age: 7 }
+//得到所有实例属性 无论是否枚举
+//不可枚举的constructor属性
+//以上两种可取代for-in循环
+var keys = Object.getOwnPropertyNames(Personin.prototype);
+console.log(keys);                                      //[ 'constructor', 'name', 'age', 'job', 'sayName' ]
+
+//简化原型模式写法
+function Person(){
+
+}
+Person.prototype = {
+    //此时constructor不能指向Person
+    //没创建一个函数 会同时创建prototype对象 自动获取constructor属性 此时的写法重写了默认的prototype对象
+    //固constructor属性变成了新对象的constructor属性(指向Object构造函数) 不能指向Person函数
+    //下面这句可以让constructor指向Person函数
+    constructor : Person,
+    name : 'sumo',
+    age : 18 ,
+    job : 'wfe',
+    sayName : function(){
+        console.log(this.name);
+    }
+};
+var a5 = new Person();
+console.log(a5 instanceof Object);          //true
+console.log(a5 instanceof Person);          //true
+//没有constructor : Person,时 false
+console.log(a5.constructor == Person);      //false    ||   true
+console.log(a5.constructor == Object);      //true     ||   false
