@@ -119,3 +119,26 @@ console.log(a5 instanceof Person);          //true
 //没有constructor : Person,时 false
 console.log(a5.constructor == Person);      //false    ||   true
 console.log(a5.constructor == Object);      //true     ||   false
+
+
+//原型模式最大的弊端 --原型中的属性被实例所共享
+//有时候实例需要有单独的属性
+function Personshare(){
+
+}
+Personshare.prototype = {
+    constructor : Personshare ,
+    name : 'momo' ,
+    age : 18 ,
+    job : 'fee' ,
+    friends : ['sumo','summore'],
+    sayName : function(){
+        console.log(this.name);
+    }
+};
+var a6 = new Personshare();
+var a7 = new Personshare();
+a6.friends.push('sumomo');
+console.log(a6.friends);                    //[ 'sumo', 'summore', 'sumomo' ]
+console.log(a7.friends);                    //[ 'sumo', 'summore', 'sumomo' ]
+console.log(a6.friends === a7.friends);     //true
