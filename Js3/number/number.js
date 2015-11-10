@@ -16,7 +16,9 @@ console.log(num1.toFixed(3));			//10.001
  */
 var numObject = new Number(10) ;
 var numValue = 10 ;
+//typeof  判断基本类型
 console.log(typeof numObject);				//object
 console.log(typeof numValue);				//number
+//instanceof 判断引用类型
 console.log(numObject instanceof Number);	//true
 console.log(numValue instanceof Number);	//false

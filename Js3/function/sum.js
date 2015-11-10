@@ -6,7 +6,7 @@
  * @param  {[type]} num2 [description]
  * @return {[type]}      [description]
  */
-/*function sum(num1,num2){
+function sum(num1,num2){
     return num1+num2 ;
 }
 console.log(sum(10,10));            //20
@@ -15,4 +15,4 @@ var anotherSum = sum ;
 console.log(anotherSum(10,10));     //20
 //即使sum为空 仍可正常调用anotherSum
 sum = null ;
-console.log(anotherSum(10,10));     //20*/
+console.log(anotherSum(10,10));     //20
