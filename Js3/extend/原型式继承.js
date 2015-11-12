@@ -2,6 +2,7 @@
  * 4.原型式继承
  * 必须有一个对象作为另一个对象的基础
  * 返回的新对象 将person作为原型 
+ * 引用类型值得属性都会共享相应的
  * 
  * @param  {[type]} o [description]
  * @return {[type]}   [description]
@@ -54,3 +55,4 @@ var twoPerson = Object.create(person1,{
 	}
 });
 console.log(twoPerson.name);					//asd
+
