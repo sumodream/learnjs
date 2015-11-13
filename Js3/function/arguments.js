@@ -4,6 +4,7 @@
  * @param  {[type]} num [description]
  * @return {[type]}     [description]
  */
+//递归
 function factorial(num){
 	if(num <= 1){
 		return 1 ;
