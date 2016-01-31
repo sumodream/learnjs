@@ -1,13 +1,8 @@
-<!-- call  apply 简单的用法 -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>013_function5</title>
-	<script type="text/javascript" charset="utf-8">
+/*call  apply 简单的用法*/
+
 		//call  apply 简单的用法：绑定一些函数 用于传递参数 调用
 
-		/*function sum(x,y){
+		function sum(x,y){
 			return x+y;
 		}
 		function call1(num1,num2){
@@ -17,18 +12,18 @@
 			return sum.apply(this,[num1,num2]);   //要用数组
 
 		}
-		alert(call1(10,20));
-		alert(apply1(20,40));*/
+		console.log(call1(10,20));   //30
+		console.log(apply1(20,40));  //60
 
  
 
  		//扩充作用域
 
- 		/*window.color="red";
+/* 		window.color="red";
  		var obj={color:"blue"};
  		var obj2={color:"yellow"};
  		function showColor(){
- 			alert(this.color);
+ 			console.log(this.color);
  		}
  		showColor.call(this);   //this  目前指 window
  		showColor.call(obj);*/
@@ -46,17 +41,9 @@
 			return x*y;
 		}
 		var o=new Obj(10,20);
-		//alert(test1.call(o,o.x,o.y));
+		console.log(test1.call(o,o.x,o.y));   //30
 
 		o.method=test1;
 		o.method(o.x,o.y);
-		alert(o.method(o.x,o.y));
+		console.log(o.method(o.x,o.y));   //30
 		delete o.method;                 //临时定义的method删掉
-
-
-	</script>
-</head>
-<body>
-	
-</body>
-</html>

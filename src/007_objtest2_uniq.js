@@ -27,7 +27,7 @@
 			}
 			return obj;	
 		}
-		console.log(toObject(arr));  //{ '1': true,'2': true,'3': true,'4': true,'5': true,'6': true,'10': true,'15': true,'': true }
+		//console.log(toObject(arr));  //{ '1': true,'2': true,'3': true,'4': true,'5': true,'6': true,'10': true,'15': true,'': true }
 		// 3 把这个对象再还原成数组
 		function keys(obj){
 			var arr=[];                         //私有对象
@@ -41,10 +41,34 @@
 		}
 		//index 
 		//[ '0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19' ]
-		console.log(keys(arr));
+		//console.log(keys(arr));
  
  		//综合的方法 去掉数组中的重复项
 		function uniq(newarr){
 			return keys(toObject(newarr));
 		}
-		console.log(uniq(arr));   //[ '1', '2', '3', '4', '5', '6', '10', '15', '' ]
+		//console.log(uniq(arr));   //[ '1', '2', '3', '4', '5', '6', '10', '15', '' ]
+
+
+
+		var arr = [1,2,3,2,4,2,3,6,'1','2','10','2','3','5','5','1','10','15','',''];
+		var toObject = function(arr){
+			var obj={};
+			for(var i = 0 ; i<arr.length;i++){
+				obj[arr[i]]=true;
+			}
+			return obj;
+		}
+		var keys = function(obj){
+			var arr = [];
+			for(var attr in obj){
+				if(obj.hasOwnProperty(attr)){
+					arr.push(attr);
+				}
+			}
+			return arr;
+		}
+		var uniq = function(newarr){
+			return keys(toObject(newarr));
+		}
+		console.log(uniq(arr));
