@@ -1,11 +1,4 @@
-<!--引用类型 objtest  模拟Java里的Map-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>006_objtest</title>
-	<script type="text/javascript" charset="utf-8">
-
+/*引用类型 objectest  模拟Java里的Map*/
 		//var obj=new Object();   //function object
 
 		function Map(){
@@ -61,18 +54,11 @@
 		m.put("03",true);
 		m.put("04",new Date()); 
 
-		//alert(m.size());
-		//alert(m.get("02"));
-		//m.remove("03");        //null
-		//alert(m.get("03"));
+		console.log(m.size());  //4
+		console.log(m.get("02"));  //0
+		m.remove("03");       
+		console.log(m.get("03"));  //null
 
 		m.eachMap(function(key,value){  
-			alert(key +":" + value);
+			//console.log(key +":" + value);  //01:abc 02:0 03:true 04:Sun Jan 31 2016 00:40:44 GMT+0800 (中国标准时间) 		
 		});
-
-	</script>
-</head>
-<body>
-	
-</body>
-</html>
